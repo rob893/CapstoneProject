@@ -34,6 +34,9 @@ date_default_timezone_set('EST');
 				<div class="navbar-nav">
 					<a href="index.php" class='nav-item nav-link'>Home</a>
 				</div>
+				<div class="navbar-nav">
+					<a href="report.php" class='nav-item nav-link'>Report</a>
+				</div>
 			</div>
 		</nav>
 		<br>

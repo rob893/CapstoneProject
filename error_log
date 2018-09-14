@@ -1,0 +1,8 @@
+[10-Sep-2018 15:15:50 EST] PHP Warning:  file_get_contents(http://ieeexploreapi.ieee.org/api/v1/search/articles?querytext=c++&amp;start_year=2018&amp;format=json&amp;apikey=c67wkrzktr7ucc385gznctzb): failed to open stream: HTTP request failed! HTTP/1.1 500 Internal Server Error
+ in /home/rob893/public_html/CapstoneProject/APITest.php on line 25
+[10-Sep-2018 15:22:02 EST] PHP Warning:  file_get_contents(http://ieeexploreapi.ieee.org/api/v1/search/articles?querytext=c++&amp;start_year=2018&amp;format=json&amp;apikey=c67wkrzktr7ucc385gznctzb): failed to open stream: HTTP request failed! HTTP/1.1 500 Internal Server Error
+ in /home/rob893/public_html/CapstoneProject/APITest.php on line 25
+[10-Sep-2018 15:29:12 EST] PHP Fatal error:  Uncaught Error: Call to undefined method XPLORE::startYear() in /home/rob893/public_html/CapstoneProject/APITest.php:38
+Stack trace:
+#0 {main}
+  thrown in /home/rob893/public_html/CapstoneProject/APITest.php on line 38

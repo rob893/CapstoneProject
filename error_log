@@ -6,3 +6,4 @@
 Stack trace:
 #0 {main}
   thrown in /home/rob893/public_html/CapstoneProject/APITest.php on line 38
+[15-Sep-2018 00:34:27 UTC] PHP Parse error:  syntax error, unexpected '/', expecting end of file in /home/rob893/public_html/CapstoneProject/dbconnection.php on line 10

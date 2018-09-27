@@ -26,6 +26,11 @@ class IEEEDataSource extends DataSource
 		
 		return $formattedData;
 	}
+	
+	protected function getDatabaseTableName()
+	{
+		return "ieeeTable";
+	}
 }
 
 ?>

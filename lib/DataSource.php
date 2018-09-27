@@ -10,6 +10,8 @@ abstract class DataSource
 	
 	abstract protected function getRawDataFromAPI($queryWord);
 	
+	abstract protected function getDatabaseTableName();
+	
 	public function updateDatabase()
 	{
 			$apiData = $this->getFormattedDataFromAPI($this->queryWord);
@@ -17,7 +19,7 @@ abstract class DataSource
 			if($this->checkDataFormat($apiData))
 			{
 				//put in database
-				echo "Inserting data into the database!";
+				echo "Inserting data into the database table ".$this->getDatabaseTableName()."!";
 			}
 			else
 			{

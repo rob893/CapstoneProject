@@ -10,7 +10,7 @@ class IEEEDataSource extends DataSource
 	protected function getRawDataFromAPI($queryWord)
 	{
 		$query = new XPLORE($this->ieeeAPIKey);
-		$query->queryText($this->queryWord);
+		$query->queryText($queryWord);
 		$query->resultsFilter('start_year', '2018');
 		$results = $query->callAPI();
 		
@@ -29,7 +29,7 @@ class IEEEDataSource extends DataSource
 	
 	protected function getDatabaseTableName()
 	{
-		return "ieeeTable";
+		return "ieeeData";
 	}
 }
 

@@ -1,10 +1,15 @@
 <?php
-require_once('dbconnection.php');
 
 abstract class DataSource
 {
-	protected $queryWord;
+	protected $conn;
 	
+	
+	function __construct()
+	{
+		include('dbconnection.php');
+		$this->conn = $conn;
+	}
 	
 	abstract protected function getFormattedDataFromAPI($queryWord);
 	
@@ -14,39 +19,44 @@ abstract class DataSource
 	
 	public function updateDatabase()
 	{
-			$apiData = $this->getFormattedDataFromAPI($this->queryWord);
-			
+		$keyWordQuery = "SELECT * FROM Keywords";
+		$conn = $this->conn;
+		$results = $conn->query($keyWordQuery);
+		
+		while($row = $results->fetch_assoc())
+		{
+			$apiData = $this->getFormattedDataFromAPI($row['word']);
+		
 			if($this->checkDataFormat($apiData))
 			{
-				//put in database
-				echo "Inserting data into the database table ".$this->getDatabaseTableName()."!";
+				$sqlInsert = $conn->prepare("INSERT INTO ".$this->getDatabaseTableName()." (keywordId, frequency) VALUES (?, ?)");
+				$sqlInsert->bind_param('ii', $row['id'], $apiData['freq']);
+				if($sqlInsert->execute() === true){
+					$sqlInsert->close();
+				} 
+				else 
+				{
+					echo $sqlInsert->error;
+					$sqlInsert->close();
+				}
 			}
 			else
 			{
 				echo "Data is not formatted correctly to be put into the database!";
 			}
+		}
 	}
 	
-	public function setQueryWord($word)
-	{
-			$this->queryWord = $word;
-	}
-	
-	public function getQueryWord()
-	{
-		return $this->queryWord;
-	}
-	
-	public function printRawDataFromAPI()
+	public function printRawDataFromAPI($queryWord)
 	{
 		echo "<pre>";
-		print_r($this->getRawDataFromAPI($this->queryWord));
+		print_r($this->getRawDataFromAPI($queryWord));
 		echo "</pre>";
 	}
 	
-	public function printFormattedDataFromAPI()
+	public function printFormattedDataFromAPI($queryWord)
 	{
-		$data = $this->getFormattedDataFromAPI($this->queryWord);
+		$data = $this->getFormattedDataFromAPI($queryWord);
 		
 		if(!$this->checkDataFormat($data))
 		{

@@ -20,17 +20,15 @@ require_once('lib/IEEEDataSource.php');
 if(isset($_POST['submitQuery']) && isset($_POST['query'])){
 	
 	$ieeeDataSource = new IEEEDataSource();
-	$ieeeDataSource->setQueryWord($_POST['query']);
 	
-	echo "<br><h2>Results for: ".$ieeeDataSource->getQueryWord()."</h2>";
-	
-	$ieeeDataSource->updateDatabase();
+	echo "<br><h2>Results for: ".$_POST['query']."</h2>";
+	//$ieeeDataSource->updateDatabase();
 	
 	echo "<h3>Formatted for Database insertion:</h3>";
-	$ieeeDataSource->printFormattedDataFromAPI();
+	$ieeeDataSource->printFormattedDataFromAPI($_POST['query']);
 	
 	echo "<h3>Raw data from API:</h3><br>";
-	$ieeeDataSource->printRawDataFromAPI();
+	$ieeeDataSource->printRawDataFromAPI($_POST['query']);
 }
 
 require_once('footer.php');

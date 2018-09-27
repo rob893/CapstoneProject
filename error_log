@@ -1,0 +1,30 @@
+[27-Sep-2018 00:38:18 EST] PHP Notice:  Undefined variable: conn in /home/rob893/public_html/CapstoneProject/lib/DataSource.php on line 18
+[27-Sep-2018 00:38:18 EST] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /home/rob893/public_html/CapstoneProject/lib/DataSource.php:18
+Stack trace:
+#0 /home/rob893/public_html/CapstoneProject/APITest.php(27): DataSource->updateDatabase()
+#1 {main}
+  thrown in /home/rob893/public_html/CapstoneProject/lib/DataSource.php on line 18
+[27-Sep-2018 00:44:52 EST] PHP Notice:  Undefined variable: conn in /home/rob893/public_html/CapstoneProject/lib/DataSource.php on line 24
+[27-Sep-2018 00:44:52 EST] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /home/rob893/public_html/CapstoneProject/lib/DataSource.php:24
+Stack trace:
+#0 /home/rob893/public_html/CapstoneProject/APITest.php(27): DataSource->updateDatabase()
+#1 {main}
+  thrown in /home/rob893/public_html/CapstoneProject/lib/DataSource.php on line 24
+[27-Sep-2018 00:45:26 EST] PHP Notice:  Undefined variable: conn in /home/rob893/public_html/CapstoneProject/lib/DataSource.php on line 24
+[27-Sep-2018 00:45:26 EST] PHP Notice:  Undefined property: IEEEDataSource::$ in /home/rob893/public_html/CapstoneProject/lib/DataSource.php on line 24
+[27-Sep-2018 00:45:26 EST] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /home/rob893/public_html/CapstoneProject/lib/DataSource.php:25
+Stack trace:
+#0 /home/rob893/public_html/CapstoneProject/APITest.php(27): DataSource->updateDatabase()
+#1 {main}
+  thrown in /home/rob893/public_html/CapstoneProject/lib/DataSource.php on line 25
+[27-Sep-2018 00:46:33 EST] PHP Notice:  Undefined variable: sqlInsertHours in /home/rob893/public_html/CapstoneProject/lib/DataSource.php on line 35
+[27-Sep-2018 00:46:33 EST] PHP Fatal error:  Uncaught Error: Call to a member function execute() on null in /home/rob893/public_html/CapstoneProject/lib/DataSource.php:35
+Stack trace:
+#0 /home/rob893/public_html/CapstoneProject/APITest.php(27): DataSource->updateDatabase()
+#1 {main}
+  thrown in /home/rob893/public_html/CapstoneProject/lib/DataSource.php on line 35
+[27-Sep-2018 00:53:15 EST] PHP Fatal error:  Uncaught Error: Call to undefined function checkDataFormat() in /home/rob893/public_html/CapstoneProject/lib/DataSource.php:87
+Stack trace:
+#0 /home/rob893/public_html/CapstoneProject/APITest.php(26): DataSource->testCheckData()
+#1 {main}
+  thrown in /home/rob893/public_html/CapstoneProject/lib/DataSource.php on line 87

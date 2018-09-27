@@ -1,6 +1,6 @@
 <?php
 ini_set('display_errors', true);
-require_once('dbconnection.php');
+require_once('lib/dbconnection.php');
 
 date_default_timezone_set('EST');
 ?>

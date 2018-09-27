@@ -1,9 +1,36 @@
-[10-Sep-2018 15:15:50 EST] PHP Warning:  file_get_contents(http://ieeexploreapi.ieee.org/api/v1/search/articles?querytext=c++&amp;start_year=2018&amp;format=json&amp;apikey=c67wkrzktr7ucc385gznctzb): failed to open stream: HTTP request failed! HTTP/1.1 500 Internal Server Error
- in /home/rob893/public_html/CapstoneProject/APITest.php on line 25
-[10-Sep-2018 15:22:02 EST] PHP Warning:  file_get_contents(http://ieeexploreapi.ieee.org/api/v1/search/articles?querytext=c++&amp;start_year=2018&amp;format=json&amp;apikey=c67wkrzktr7ucc385gznctzb): failed to open stream: HTTP request failed! HTTP/1.1 500 Internal Server Error
- in /home/rob893/public_html/CapstoneProject/APITest.php on line 25
-[10-Sep-2018 15:29:12 EST] PHP Fatal error:  Uncaught Error: Call to undefined method XPLORE::startYear() in /home/rob893/public_html/CapstoneProject/APITest.php:38
+[26-Sep-2018 21:37:58 EST] PHP Parse error:  syntax error, unexpected 'public' (T_PUBLIC), expecting end of file in /home/rob893/public_html/CapstoneProject/lib/IEEEDataSource.php on line 5
+[26-Sep-2018 21:38:48 EST] PHP Parse error:  syntax error, unexpected 'string' (T_STRING), expecting function (T_FUNCTION) or const (T_CONST) in /home/rob893/public_html/CapstoneProject/lib/IEEEDataSource.php on line 7
+[26-Sep-2018 21:39:02 EST] PHP Parse error:  syntax error, unexpected 'string' (T_STRING), expecting function (T_FUNCTION) or const (T_CONST) in /home/rob893/public_html/CapstoneProject/lib/DataSource.php on line 5
+[26-Sep-2018 21:39:13 EST] PHP Parse error:  syntax error, unexpected '}', expecting ',' or ';' in /home/rob893/public_html/CapstoneProject/lib/DataSource.php on line 25
+[26-Sep-2018 21:39:30 EST] PHP Fatal error:  Uncaught Error: Call to undefined function getDataFromAPI() in /home/rob893/public_html/CapstoneProject/lib/DataSource.php:23
 Stack trace:
-#0 {main}
-  thrown in /home/rob893/public_html/CapstoneProject/APITest.php on line 38
-[15-Sep-2018 00:34:27 UTC] PHP Parse error:  syntax error, unexpected '/', expecting end of file in /home/rob893/public_html/CapstoneProject/dbconnection.php on line 10
+#0 /home/rob893/public_html/CapstoneProject/APITest.php(23): DataSource->printDataFromAPI()
+#1 {main}
+  thrown in /home/rob893/public_html/CapstoneProject/lib/DataSource.php on line 23
+[26-Sep-2018 21:42:15 EST] PHP Notice:  Undefined variable: queryWord in /home/rob893/public_html/CapstoneProject/lib/DataSource.php on line 23
+[26-Sep-2018 21:42:15 EST] PHP Notice:  Undefined variable: ieeeAPIKey in /home/rob893/public_html/CapstoneProject/lib/IEEEDataSource.php on line 12
+[26-Sep-2018 21:43:01 EST] PHP Notice:  Undefined variable: queryWord in /home/rob893/public_html/CapstoneProject/lib/DataSource.php on line 23
+[26-Sep-2018 21:43:01 EST] PHP Notice:  Undefined variable: ieeeAPIKey in /home/rob893/public_html/CapstoneProject/lib/IEEEDataSource.php on line 12
+[26-Sep-2018 21:43:01 EST] PHP Notice:  Undefined property: IEEEDataSource::$ in /home/rob893/public_html/CapstoneProject/lib/IEEEDataSource.php on line 12
+[26-Sep-2018 21:43:01 EST] PHP Notice:  Undefined property: IEEEDataSource::$ in /home/rob893/public_html/CapstoneProject/lib/IEEEDataSource.php on line 13
+[26-Sep-2018 21:44:48 EST] PHP Notice:  Undefined variable: queryWord in /home/rob893/public_html/CapstoneProject/lib/DataSource.php on line 23
+[27-Sep-2018 02:51:24 UTC] PHP Warning:  require_once(dbconnection.php): failed to open stream: No such file or directory in /home/rob893/public_html/CapstoneProject/header.php on line 3
+[27-Sep-2018 02:51:24 UTC] PHP Fatal error:  require_once(): Failed opening required 'dbconnection.php' (include_path='.:/opt/alt/php71/usr/share/pear') in /home/rob893/public_html/CapstoneProject/header.php on line 3
+[26-Sep-2018 22:08:05 EST] PHP Parse error:  syntax error, unexpected '}', expecting ',' or ';' in /home/rob893/public_html/CapstoneProject/lib/DataSource.php on line 24
+[26-Sep-2018 22:08:17 EST] PHP Fatal error:  Uncaught Error: Call to undefined function getRawDataFromAPI() in /home/rob893/public_html/CapstoneProject/lib/IEEEDataSource.php:22
+Stack trace:
+#0 /home/rob893/public_html/CapstoneProject/lib/DataSource.php(46): IEEEDataSource->getFormattedDataFromAPI('c++')
+#1 /home/rob893/public_html/CapstoneProject/APITest.php(24): DataSource->printFormattedDataFromAPI()
+#2 {main}
+  thrown in /home/rob893/public_html/CapstoneProject/lib/IEEEDataSource.php on line 22
+[26-Sep-2018 22:08:59 EST] PHP Notice:  Undefined variable: results in /home/rob893/public_html/CapstoneProject/lib/IEEEDataSource.php on line 27
+[26-Sep-2018 22:08:59 EST] PHP Fatal error:  Uncaught Error: Call to undefined function checkDataFormat() in /home/rob893/public_html/CapstoneProject/lib/DataSource.php:48
+Stack trace:
+#0 /home/rob893/public_html/CapstoneProject/APITest.php(24): DataSource->printFormattedDataFromAPI()
+#1 {main}
+  thrown in /home/rob893/public_html/CapstoneProject/lib/DataSource.php on line 48
+[26-Sep-2018 22:09:45 EST] PHP Fatal error:  Uncaught Error: Call to undefined function checkDataFormat() in /home/rob893/public_html/CapstoneProject/lib/DataSource.php:48
+Stack trace:
+#0 /home/rob893/public_html/CapstoneProject/APITest.php(24): DataSource->printFormattedDataFromAPI()
+#1 {main}
+  thrown in /home/rob893/public_html/CapstoneProject/lib/DataSource.php on line 48

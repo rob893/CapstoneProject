@@ -1,6 +1,6 @@
 <?php
 require_once('header.php');
-require_once('xplore-php-sdk.php');
+require_once('lib/IEEEDataSource.php');
 ?>
 
 <form action='#' method='post' enctype='multipart/form-data'>
@@ -16,32 +16,22 @@ require_once('xplore-php-sdk.php');
 </form>
 
 <?php
-if(isset($_POST['submitQuery'])){
-	
-	$ieeeAPIKey = "c67wkrzktr7ucc385gznctzb";
-	$queryText = $_POST['query'];
-	// $ieeeLink = 'http://ieeexploreapi.ieee.org/api/v1/search/articles?querytext='.$queryText.'&start_year=2018&format=json&apikey='.$ieeeAPIKey;
-	// echo $queryText;
-	// try{
-		// $data = json_decode(file_get_contents($ieeeLink), true);
-		// var_dump(http_response_code());
-		// echo '<pre>';
-		// print_r($data);
-		// echo '</pre>';
-	// } 
-	// catch(Exception $e){
-		// echo 'Something went wrong. '.$e->getMessage();
-	// }
-	
-	$query = new XPLORE($ieeeAPIKey);
-	$query->queryText($queryText);
-	$query->resultsFilter('start_year', '2018');
-	$results = $query->callAPI();
-	echo '<pre>';
-	print_r($results);
-	echo '</pre>';
-}
 
+if(isset($_POST['submitQuery']) && isset($_POST['query'])){
+	
+	$ieeeDataSource = new IEEEDataSource();
+	$ieeeDataSource->setQueryWord($_POST['query']);
+	
+	echo "<br><h2>Results for: ".$ieeeDataSource->getQueryWord()."</h2>";
+	
+	$ieeeDataSource->updateDatabase();
+	
+	echo "<h3>Formatted for Database insertion:</h3>";
+	$ieeeDataSource->printFormattedDataFromAPI();
+	
+	echo "<h3>Raw data from API:</h3><br>";
+	$ieeeDataSource->printRawDataFromAPI();
+}
 
 require_once('footer.php');
 ?>

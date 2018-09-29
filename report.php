@@ -1,6 +1,9 @@
 <?php
 require_once('header.php');
 ?>
+<br>
+<br>
+<div class="container-fluid">
 <h2>Report</h2>
 <br>
 
@@ -37,25 +40,30 @@ if(isset($_POST['selectClassSubmit'])){
 	<h3>Subjects for this Class</h3>
 	<h4>'Java'</h4>
 	<p>Recommendation: No update needed.</p>
-	<img src="lineGraph.JPG">
+	<img src="img/lineGraph.JPG" class="img-fluid">
 	<br>
 	<br>
 	<h4>'Waterfall Method'</h4>
 	<p>Recommendation: Update needed.</p>
-	<img src="lineGraph.JPG">
+	<img src="img/lineGraph.JPG" class="img-fluid">
 	<br>
 	<br>
 	<h4>'Requirements Elicitation'</h4>
 	<p>Recommendation: No update needed.</p>
-	<img src="lineGraph.JPG">
+	<img src="img/lineGraph.JPG" class="img-fluid">
 	<br>
 	<br>
 	<h4>'Agile'</h4>
 	<p>Recommendation: No update needed.</p>
-	<img src="lineGraph.JPG">
+	<img src="img/lineGraph.JPG" class="img-fluid">
 	<br>
 
 	<?php
 }
+?>
+
+</div>
+
+<?php
 require_once('footer.php');
 ?>

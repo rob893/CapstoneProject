@@ -2,21 +2,24 @@
 require_once('header.php');
 require_once('lib/IEEEDataSource.php');
 ?>
+<br>
+<br>
 
-<form action='#' method='post' enctype='multipart/form-data'>
-	<div class='row'>
-		<div class='col-sm-2'>
-			<div class='form-group'>
-				<label for='associatedClass'>Enter Search:</label>
-				<input name='query' id='query' type='text'>
+<div class="container-fluid">
+	<form action='#' method='post' enctype='multipart/form-data'>
+		<div class='row'>
+			<div class='col-sm-2'>
+				<div class='form-group'>
+					<label for='associatedClass'>Enter Search:</label>
+					<input name='query' id='query' type='text'>
+				</div>
 			</div>
 		</div>
-	</div>
-	<input name='submitQuery' type='submit' value='Search'>
-</form>
+		<input name='submitQuery' type='submit' value='Search'>
+	</form>
 
 <?php
-
+//crontab -e 00 00 * * 5 php /home/rob893/public_html/CapstoneProject/lib/UpdateDatabase.php to run every Friday
 if(isset($_POST['submitQuery']) && isset($_POST['query'])){
 	
 	$ieeeDataSource = new IEEEDataSource();
@@ -30,6 +33,10 @@ if(isset($_POST['submitQuery']) && isset($_POST['query'])){
 	echo "<h3>Raw data from API:</h3><br>";
 	$ieeeDataSource->printRawDataFromAPI($_POST['query']);
 }
+?>
 
+</div>
+
+<?php
 require_once('footer.php');
 ?>

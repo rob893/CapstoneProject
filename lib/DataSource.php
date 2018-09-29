@@ -60,8 +60,8 @@ abstract class DataSource
 		
 		if(!$this->checkDataFormat($data))
 		{
-				echo "The data is not formatted correctly! Please check the getFormattedDataFromAPI() function implementation.";
-				return;
+			echo "The data is not formatted correctly! Please check the getFormattedDataFromAPI() function implementation.";
+			return;
 		}
 		
 		echo "<pre>";

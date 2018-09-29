@@ -1,1 +1,1 @@
-# CapstoneProject
+Curriculum Forecaster

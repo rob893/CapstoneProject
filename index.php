@@ -2,46 +2,22 @@
 require_once('header.php');
 ?>
 
-<h2>Input Form</h2>
-
-<form>
-	<div class='row'>
-		<div class='col-sm-2'>
-			<div class='form-group'>
-				<label for='class'>Class Name:</label>
-				<input type='text' class='form-control' name='class' id='class' required>
+<header class="masthead text-white text-center">
+	<div class="overlay"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-9 mx-auto">
+					<h1 class="mb-5">Welcome to Curriculum Forecaster!</h1>
+					<h3 class="mb-5">Inspiring Stuff</h3>
+				</div>
+			</div>
+			<div class = "row">
+				<div class="col-md-5 col-lg-4 col-xl-3 mx-auto">
+				<a href="report.php"><button class="btn btn-block btn-lg btn-primary">Let's Start!</button></a>
 			</div>
 		</div>
 	</div>
-	<input name='submitClass' type='submit' value='Add Class'>
-</form>
-
-<br>
-
-<form>
-	<div class='row'>
-		<div class='col-sm-2'>
-			<div class='form-group'>
-				<label for='keyword'>Associate Keyword:</label>
-				<input type='text' class='form-control' name='keyword' id='keyword' required>
-			</div>
-		</div>
-	</div>
-	
-	<div class='row'>
-		<div class='col-sm-2'>
-			<div class='form-group'>
-				<label for='associatedClass'>With Class:</label>
-				<select class='form-control' id='associatedClass' name='associatedClass'>
-					<option>Software Engineering</option>
-					<option>Requirements Engineering</option>
-					<option>Project Planning and Management</option>
-				</select>
-			</div>
-		</div>
-	</div>
-	<input name='submitKeyword' type='submit' value='Associate'>
-</form>
+</header>
 
 <?php
 require_once('footer.php');

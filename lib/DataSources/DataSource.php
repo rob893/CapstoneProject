@@ -7,7 +7,7 @@ abstract class DataSource
 	
 	function __construct()
 	{
-		include('dbconnection.php');
+		include(__DIR__ . '/../dbconnection.php');
 		$this->conn = $conn;
 	}
 	
@@ -67,6 +67,23 @@ abstract class DataSource
 		echo "<pre>";
 		print_r($data);
 		echo "</pre>";
+	}
+	
+	public function getDataFromDatabase()
+	{
+		$sqlQuery = "SELECT * FROM ".$this->getDatabaseTableName();
+		$conn = $this->conn;
+		$queryResults = $conn->query($sqlQuery);
+		
+		$results = [];
+		$i = 0;
+		while($row = $queryResults->fetch_assoc())
+		{
+			$results[$i] = $row;
+			$i++;
+		}
+		
+		return $results;
 	}
 	
 	protected function checkDataFormat($data)

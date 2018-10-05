@@ -1,6 +1,6 @@
 <?php
 require_once('DataSource.php');
-require_once('SDKs/xplore-php-sdk.php');
+require_once(__DIR__ . '/../SDKs/xplore-php-sdk.php');
 
 class IEEEDataSource extends DataSource
 {
@@ -11,6 +11,7 @@ class IEEEDataSource extends DataSource
 	{
 		$query = new XPLORE($this->ieeeAPIKey);
 		$query->queryText($queryWord);
+		$query->maximumResults(200);
 		$query->resultsFilter('start_year', '2018');
 		$results = $query->callAPI();
 		

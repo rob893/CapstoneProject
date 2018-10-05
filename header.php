@@ -51,5 +51,8 @@ date_default_timezone_set('EST');
 				<div class="navbar-nav">
 					<a href="APITest.php" class='nav-item nav-link'>Test API</a>
 				</div>
+				<div class="navbar-nav">
+					<a href="testReport.php" class='nav-item nav-link'>Test Report</a>
+				</div>
 			</div>
 		</nav>

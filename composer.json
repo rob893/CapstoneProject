@@ -1,0 +1,5 @@
+{
+    "autoload": {
+        "psr-4": { "CurriculumForecaster\\": ["src/", "src/DataSources", "src/SDKs", "src/FuturePredictors", "src/RelevancyRules"] }
+    }
+}

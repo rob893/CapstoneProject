@@ -1,5 +1,5 @@
 <?php
-require_once('FuturePredictor.php');
+namespace CurriculumForecaster;
 
 class FuturePredictor1 extends FuturePredictor
 {

@@ -1,7 +1,5 @@
 <?php
-require_once('DataSources/DataSource.php');
-require_once('RelevancyRules/RelevancyRule.php');
-require_once('FuturePredictors/FuturePredictor.php');
+namespace CurriculumForecaster;
 
 
 class Report

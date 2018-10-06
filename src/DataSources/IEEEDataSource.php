@@ -1,6 +1,5 @@
 <?php
-require_once('DataSource.php');
-require_once(__DIR__ . '/../SDKs/xplore-php-sdk.php');
+namespace CurriculumForecaster;
 
 class IEEEDataSource extends DataSource
 {
@@ -9,7 +8,7 @@ class IEEEDataSource extends DataSource
 	
 	protected function getRawDataFromAPI($queryWord)
 	{
-		$query = new XPLORE($this->ieeeAPIKey);
+		$query = new \CurriculumForecaster\XPLORE($this->ieeeAPIKey);
 		$query->queryText($queryWord);
 		$query->maximumResults(200);
 		$query->resultsFilter('start_year', '2018');

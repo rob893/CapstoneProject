@@ -1,4 +1,5 @@
 <?php
+namespace CurriculumForecaster;
 
 abstract class FuturePredictor
 {

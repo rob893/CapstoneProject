@@ -1,6 +1,6 @@
 <?php
 require_once('header.php');
-require_once('lib/DataSources/IEEEDataSource.php');
+
 ?>
 <br>
 <br>
@@ -22,7 +22,7 @@ require_once('lib/DataSources/IEEEDataSource.php');
 //crontab -e 00 00 * * 5 php /home/rob893/public_html/CapstoneProject/lib/UpdateDatabase.php to run every Friday
 if(isset($_POST['submitQuery']) && isset($_POST['query'])){
 	
-	$ieeeDataSource = new IEEEDataSource();
+	$ieeeDataSource = new \CurriculumForecaster\IEEEDataSource();
 	
 	echo "<br><h2>Results for: ".$_POST['query']."</h2>";
 	//$ieeeDataSource->updateDatabase();

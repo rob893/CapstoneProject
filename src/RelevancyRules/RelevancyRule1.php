@@ -1,5 +1,5 @@
 <?php
-require_once('RelevancyRule.php');
+namespace CurriculumForecaster;
 
 class RelevancyRule1 extends RelevancyRule
 {

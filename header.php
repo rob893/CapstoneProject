@@ -1,6 +1,6 @@
 <?php
 ini_set('display_errors', true);
-require_once('lib/dbconnection.php');
+require(__DIR__ . '/vendor/autoload.php');
 
 date_default_timezone_set('EST');
 ?>

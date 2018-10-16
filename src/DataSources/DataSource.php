@@ -30,8 +30,8 @@ abstract class DataSource
 		
 			if($this->checkDataFormat($apiData))
 			{
-				$sqlInsert = $conn->prepare("INSERT INTO ".$this->getDatabaseTableName()." (keywordId, frequency) VALUES (?, ?)");
-				$sqlInsert->bind_param('ii', $row['id'], $apiData['freq']);
+				$sqlInsert = $conn->prepare("INSERT INTO ".$this->getDatabaseTableName()." (keywordId, frequency, totalSearched) VALUES (?, ?, ?)");
+				$sqlInsert->bind_param('iii', $row['id'], $apiData['freq'], $apiData['totalSearched']);
 				if($sqlInsert->execute() === true){
 					$sqlInsert->close();
 				} 
@@ -72,7 +72,9 @@ abstract class DataSource
 	
 	public function getDataFromDatabase()
 	{
-		$sqlQuery = "SELECT * FROM ".$this->getDatabaseTableName();
+		$sqlQuery = "SELECT ".$this->getDatabaseTableName().".id AS dsTableId, keywordId, frequency, totalSearched, dateTimeStamp, word 
+						FROM ".$this->getDatabaseTableName()." 
+						INNER JOIN Keywords ON Keywords.id = keywordId";
 		$conn = $this->conn;
 		$queryResults = $conn->query($sqlQuery);
 		
@@ -89,7 +91,7 @@ abstract class DataSource
 	
 	protected function checkDataFormat($data)
 	{
-		if(isset($data['word']) && isset($data['freq']))
+		if(isset($data['word']) && isset($data['freq']) && isset($data['totalSearched']) )
 		{
 			return true;
 		}

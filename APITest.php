@@ -19,7 +19,7 @@ require_once('header.php');
 	</form>
 
 <?php
-//crontab -e 00 00 * * 5 php /home/rob893/public_html/CapstoneProject/lib/UpdateDatabase.php to run every Friday
+//crontab -e 00 00 * * 5 php /home/rob893/public_html/CapstoneProject/src/UpdateDatabase.php to run every Friday
 if(isset($_POST['submitQuery']) && isset($_POST['query'])){
 	
 	$ieeeDataSource = new \CurriculumForecaster\IEEEDataSource();

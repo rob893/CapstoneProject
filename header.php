@@ -29,6 +29,11 @@ date_default_timezone_set('EST');
 		<!-- Custom styles for this template -->
 		<link href="css/landing-page.min.css" rel="stylesheet">
 		
+		<!--<script language="javascript" type="text/javascript" src="src/SDKs/flot-0.8.3/flot/jquery.js"></script>-->
+		<script src="vendor/jquery/jquery.js"></script>
+		<script language="javascript" type="text/javascript" src="src/SDKs/flot-0.8.3/flot/jquery.flot.js"></script>
+		<script language="javascript" type="text/javascript" src="src/SDKs/flot-0.8.3/flot/jquery.flot.time.js"></script>
+		
 		<title>Curriculum Forecaster</title>
 	</head>
 	<body>

@@ -23,6 +23,7 @@ class IEEEDataSource extends DataSource
 		
 		$formattedData['word'] = $queryWord;
 		$formattedData['freq'] = $unformattedData['total_records'];
+		$formattedData['totalSearched'] = $unformattedData['total_searched'];
 		
 		return $formattedData;
 	}

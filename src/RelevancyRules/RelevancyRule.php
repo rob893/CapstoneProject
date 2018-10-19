@@ -3,7 +3,7 @@ namespace CurriculumForecaster;
 
 abstract class RelevancyRule
 {
-	abstract public function analyzeData($databaseData);
+	abstract public function analyzeData(array $databaseData): float;
 }
 
 ?>

@@ -6,7 +6,7 @@ class IEEEDataSource extends DataSource
 	private $ieeeAPIKey = "c67wkrzktr7ucc385gznctzb";
 	
 	
-	protected function getRawDataFromAPI($queryWord)
+	protected function getRawDataFromAPI(string $queryWord): array
 	{
 		$query = new \CurriculumForecaster\XPLORE($this->ieeeAPIKey);
 		$query->queryText($queryWord);
@@ -17,7 +17,7 @@ class IEEEDataSource extends DataSource
 		return $results;
 	}
 	
-	protected function getFormattedDataFromAPI($queryWord)
+	protected function getFormattedDataFromAPI(string $queryWord): array
 	{
 		$unformattedData = $this->getRawDataFromAPI($queryWord);
 		
@@ -28,7 +28,7 @@ class IEEEDataSource extends DataSource
 		return $formattedData;
 	}
 	
-	protected function getDatabaseTableName()
+	protected function getDatabaseTableName(): string
 	{
 		return "ieeeData";
 	}

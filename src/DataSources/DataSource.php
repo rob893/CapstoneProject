@@ -12,11 +12,11 @@ abstract class DataSource
 		$this->conn = $conn;
 	}
 	
-	abstract protected function getFormattedDataFromAPI($queryWord);
+	abstract protected function getFormattedDataFromAPI(string $queryWord): array;
 	
-	abstract protected function getRawDataFromAPI($queryWord);
+	abstract protected function getRawDataFromAPI(string $queryWord): array;
 	
-	abstract protected function getDatabaseTableName();
+	abstract protected function getDatabaseTableName(): string;
 	
 	public function updateDatabase()
 	{
@@ -48,14 +48,14 @@ abstract class DataSource
 		}
 	}
 	
-	public function printRawDataFromAPI($queryWord)
+	public function printRawDataFromAPI(string $queryWord)
 	{
 		echo "<pre>";
 		print_r($this->getRawDataFromAPI($queryWord));
 		echo "</pre>";
 	}
 	
-	public function printFormattedDataFromAPI($queryWord)
+	public function printFormattedDataFromAPI(string $queryWord)
 	{
 		$data = $this->getFormattedDataFromAPI($queryWord);
 		
@@ -70,7 +70,7 @@ abstract class DataSource
 		echo "</pre>";
 	}
 	
-	public function getDataFromDatabase()
+	public function getDataFromDatabase(): array
 	{
 		$sqlQuery = "SELECT ".$this->getDatabaseTableName().".id AS dsTableId, keywordId, frequency, totalSearched, dateTimeStamp, word 
 						FROM ".$this->getDatabaseTableName()." 
@@ -89,7 +89,7 @@ abstract class DataSource
 		return $results;
 	}
 	
-	protected function checkDataFormat($data)
+	protected function checkDataFormat(array $data): bool
 	{
 		if(isset($data['word']) && isset($data['freq']) && isset($data['totalSearched']) )
 		{

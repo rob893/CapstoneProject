@@ -3,7 +3,7 @@ namespace CurriculumForecaster;
 
 abstract class FuturePredictor
 {
-	abstract public function predictFuture($databaseData);
+	abstract public function predictFuture(array $databaseData);
 }
 
 ?>

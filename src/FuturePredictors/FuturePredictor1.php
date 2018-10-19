@@ -3,9 +3,9 @@ namespace CurriculumForecaster;
 
 class FuturePredictor1 extends FuturePredictor
 {
-	public function predictFuture($databaseData)
+	public function predictFuture(array $databaseData)
 	{
-		echo 'Predicting future using FuturePredictor1!';
+		return 0;
 	}
 }
 

@@ -3,9 +3,9 @@ namespace CurriculumForecaster;
 
 class RelevancyRule1 extends RelevancyRule
 {
-	public function analyzeData($databaseData)
+	public function analyzeData(array $databaseData): float
 	{
-		echo 'Analyzing data using RelevancyRule1!';
+		return 0.5;
 	}
 }
 

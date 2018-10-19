@@ -2,7 +2,7 @@
 namespace CurriculumForecaster;
 
 
-class DataSourceFactory implements AbstractFactory
+class DataSourceFactory
 {
 	public function createDataSource(int $id): DataSource
 	{
@@ -10,19 +10,11 @@ class DataSourceFactory implements AbstractFactory
 		{
 			case 1:
 				return new \CurriculumForecaster\IEEEDataSource();
+			case 2:
+				return new \CurriculumForecaster\TestDataSource2();
 			default:
 				return null;
 		}
-	}
-	
-	public function createRelevancyRule(int $id): RelevancyRule
-	{
-		return null;
-	}
-	
-	public function createFuturePredictor(int $id): FuturePredictor
-	{
-		return null;
 	}
 }
 ?>

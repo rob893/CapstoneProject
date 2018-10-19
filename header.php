@@ -48,16 +48,13 @@ date_default_timezone_set('EST');
 					<a href="index.php" class='nav-item nav-link'>Home</a>
 				</div>
 				<div class="navbar-nav">
-					<a href="report.php" class='nav-item nav-link'>Report</a>
+					<a href="viewReport.php" class='nav-item nav-link'>Report</a>
 				</div>
 				<div class="navbar-nav">
 					<a href="insert.php" class='nav-item nav-link'>Add Data</a>
 				</div>
 				<div class="navbar-nav">
 					<a href="APITest.php" class='nav-item nav-link'>Test API</a>
-				</div>
-				<div class="navbar-nav">
-					<a href="testReport.php" class='nav-item nav-link'>Test Report</a>
 				</div>
 			</div>
 		</nav>

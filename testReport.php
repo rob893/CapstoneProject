@@ -1,11 +1,17 @@
 <?php
 require_once('header.php');
 
-$ieeeDS = new \CurriculumForecaster\IEEEDataSource();
-$rule1 = new \CurriculumForecaster\RelevancyRule1();
-$predictor1 = new \CurriculumForecaster\FuturePredictor1();
+$factoryProducer = new \CurriculumForecaster\FactoryProducer();
+	
+$dataSourceFactory = $factoryProducer->createFactory(1);
+$ruleFactory = $factoryProducer->createFactory(2);
+$predictorFactory = $factoryProducer->createFactory(3);
 
-$report = new \CurriculumForecaster\Report($ieeeDS, $rule1, $predictor1, "Software Engineering Test Course");
+$dataSource = $dataSourceFactory->createDataSource(1);
+$rule = $ruleFactory->createRelevancyRule(1);
+$predictor = $predictorFactory->createFuturePredictor(1);
+
+$report = new \CurriculumForecaster\Report($dataSource, $rule, $predictor, "Software Engineering Test Course");
 
 $report->printReport();
 

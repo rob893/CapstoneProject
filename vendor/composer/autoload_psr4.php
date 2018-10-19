@@ -6,5 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'CurriculumForecaster\\' => array($baseDir . '/src', $baseDir . '/src/DataSources', $baseDir . '/src/SDKs', $baseDir . '/src/FuturePredictors', $baseDir . '/src/RelevancyRules'),
+    'CurriculumForecaster\\' => array($baseDir . '/src', $baseDir . '/src/DataSources', $baseDir . '/src/SDKs', $baseDir . '/src/Factories', $baseDir . '/src/FuturePredictors', $baseDir . '/src/RelevancyRules'),
 );

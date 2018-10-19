@@ -19,8 +19,9 @@ class ComposerStaticInit8160d70948a3affc31fd9c5a06d2a7fc
             0 => __DIR__ . '/../..' . '/src',
             1 => __DIR__ . '/../..' . '/src/DataSources',
             2 => __DIR__ . '/../..' . '/src/SDKs',
-            3 => __DIR__ . '/../..' . '/src/FuturePredictors',
-            4 => __DIR__ . '/../..' . '/src/RelevancyRules',
+            3 => __DIR__ . '/../..' . '/src/Factories',
+            4 => __DIR__ . '/../..' . '/src/FuturePredictors',
+            5 => __DIR__ . '/../..' . '/src/RelevancyRules',
         ),
     );
 

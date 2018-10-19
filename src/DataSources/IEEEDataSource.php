@@ -6,6 +6,12 @@ class IEEEDataSource extends DataSource
 	private $ieeeAPIKey = "c67wkrzktr7ucc385gznctzb";
 	
 	
+	protected function setNameAndDescription()
+	{
+		$this->name = "IEEE Xplore Digital Library";
+		$this->description = "The IEEE Xplore digital library is a collection of academic papers.";
+	}
+	
 	protected function getRawDataFromAPI(string $queryWord): array
 	{
 		$query = new \CurriculumForecaster\XPLORE($this->ieeeAPIKey);

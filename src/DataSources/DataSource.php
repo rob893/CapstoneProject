@@ -4,13 +4,18 @@ namespace CurriculumForecaster;
 abstract class DataSource
 {
 	protected $conn;
+	protected $name;
+	protected $description;
 	
-	
-	function __construct()
+	public function __construct()
 	{
-		include(__DIR__ . '/../dbconnection.php');
-		$this->conn = $conn;
+		$conn = new \CurriculumForecaster\DatabaseConnection();
+		$this->conn = $conn->getConnection();
+		
+		$this->setNameAndDescription();
 	}
+	
+	abstract protected function setNameAndDescription();
 	
 	abstract protected function getFormattedDataFromAPI(string $queryWord): array;
 	
@@ -18,11 +23,26 @@ abstract class DataSource
 	
 	abstract protected function getDatabaseTableName(): string;
 	
+	public function getName(): string
+	{
+		return $this->name;
+	}
+	
+	public function getDescription(): string
+	{
+		return $this->description;
+	}
+	
 	public function updateDatabase()
 	{
 		$keyWordQuery = "SELECT * FROM Keywords";
 		$conn = $this->conn;
-		$results = $conn->query($keyWordQuery);
+		$results = ($conn->query($keyWordQuery)) ? $conn->query($keyWordQuery) : null;
+		
+		if($results == null || $results->num_rows == 0)
+		{
+			return;
+		}
 		
 		while($row = $results->fetch_assoc())
 		{
@@ -30,15 +50,21 @@ abstract class DataSource
 		
 			if($this->checkDataFormat($apiData))
 			{
-				$sqlInsert = $conn->prepare("INSERT INTO ".$this->getDatabaseTableName()." (keywordId, frequency, totalSearched) VALUES (?, ?, ?)");
-				$sqlInsert->bind_param('iii', $row['id'], $apiData['freq'], $apiData['totalSearched']);
-				if($sqlInsert->execute() === true){
-					$sqlInsert->close();
-				} 
-				else 
+				if($sqlInsert = $conn->prepare("INSERT INTO ".$this->getDatabaseTableName()." (keywordId, frequency, totalSearched) VALUES (?, ?, ?)"))
 				{
-					echo $sqlInsert->error;
-					$sqlInsert->close();
+					$sqlInsert->bind_param('iii', $row['id'], $apiData['freq'], $apiData['totalSearched']);
+					if($sqlInsert->execute() === true){
+						$sqlInsert->close();
+					} 
+					else 
+					{
+						echo $sqlInsert->error;
+						$sqlInsert->close();
+					}
+				}
+				else
+				{
+					echo "Error preparing statement.";
 				}
 			}
 			else
@@ -76,9 +102,15 @@ abstract class DataSource
 						FROM ".$this->getDatabaseTableName()." 
 						INNER JOIN Keywords ON Keywords.id = keywordId";
 		$conn = $this->conn;
-		$queryResults = $conn->query($sqlQuery);
+		$queryResults = ($conn->query($sqlQuery)) ? $conn->query($sqlQuery) : null;
 		
 		$results = [];
+		
+		if($queryResults == null || $queryResults->num_rows == 0)
+		{
+			return $results;
+		}
+		
 		$i = 0;
 		while($row = $queryResults->fetch_assoc())
 		{

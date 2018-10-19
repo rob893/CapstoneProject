@@ -1,6 +1,9 @@
 <?php
 require_once(__DIR__ . '/../vendor/autoload.php');
 
-$ieeeDataSource = new \CurriculumForecaster\IEEEDataSource();
+$dataSourceFactory = new \CurriculumForecaster\DataSourceFactory();
+
+$ieeeDataSource = $dataSourceFactory->createDataSource(1);
+
 $ieeeDataSource->updateDatabase();
 ?>

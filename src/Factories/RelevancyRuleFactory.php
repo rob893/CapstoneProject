@@ -13,7 +13,7 @@ class RelevancyRuleFactory
 			case 2:
 				return new \CurriculumForecaster\RelevancyRule2();
 			default:
-				return null;
+				return new \CurriculumForecaster\RelevancyRule1();
 		}
 	}
 }

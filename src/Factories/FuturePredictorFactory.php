@@ -13,7 +13,7 @@ class FuturePredictorFactory
 			case 2:
 				return new \CurriculumForecaster\FuturePredictor2();
 			default:
-				return null;
+				return new \CurriculumForecaster\FuturePredictor1();
 		}
 	}
 }

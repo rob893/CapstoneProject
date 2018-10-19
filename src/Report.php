@@ -13,7 +13,7 @@ class Report
 	private $courseNeedsUpdating = false;
 	
 	
-	function __construct(Datasource $dataSource, RelevancyRule $relevancyRule, FuturePredictor $futurePredictor, string $courseName)
+	public function __construct(Datasource $dataSource, RelevancyRule $relevancyRule, FuturePredictor $futurePredictor, string $courseName)
 	{
 		$this->dataSource = $dataSource;
 		$this->relevancyRule = $relevancyRule;
@@ -51,32 +51,74 @@ class Report
 	
 	public function printReport()
 	{
-		echo '<div class="container-fluid"><br>';
+		echo "
+			<div class='container-fluid'><br>
 		
-		echo "<h2>Report</h2><br>";
-		echo "<h2>Analysis for ".$this->courseName."</h2>";
-		echo "<p>".$this->getOverallClassRecomendation()."</p>";
-		echo "<h3>Subjects for this Course:</h3>";
-		foreach($this->dataByKeyword as $keyword => $record)
+				<h2>Report</h2>
+				<br>
+				<h2>Analysis for ".$this->courseName."</h2>
+				<br>
+				<h4>Data Source Used: ".$this->dataSource->getName()."</h4>
+				<p>".$this->dataSource->getDescription()."</p>
+				<h4>Rule Used: ".$this->relevancyRule->getName()."</h4>
+				<p>".$this->relevancyRule->getDescription()."</p>
+				<h4>Future Predictor Used: ".$this->futurePredictor->getName()."</h4>
+				<p>".$this->futurePredictor->getDescription()."</p>
+				<h4>Overall Recommendation</h4>
+				<p id='overallRecomendation'></p>
+				<br>
+				<h3>Subjects for this Course:</h3>
+		";
+		
+		if(count($this->dataByKeyword) > 0)
 		{
-			echo "<div>";
-			echo "<h4>'".$keyword."'</h4>";
-			
-			echo "<p>".$this->getRecommendation($this->dataByKeyword[$keyword])."</p>";
-			echo "<p>".$this->getFurturePrediction($this->dataByKeyword[$keyword])."</p>";
-			
-			$this->printGraph($keyword);
-			
-			echo "</div>";
+			foreach($this->dataByKeyword as $keyword => $record)
+			{
+				echo "
+					<div>
+						<h4>'".$keyword."'</h4>
+						
+						<p>".$this->getRecommendation($this->dataByKeyword[$keyword])."</p>
+						<p>".$this->getFurturePrediction($this->dataByKeyword[$keyword])."</p>
+				";
+				
+				$this->printGraph($keyword);
+				
+				echo "</div>";
+			}
+		}
+		else
+		{
+			echo "<p>No data.</p>";
 		}
 		
 		echo "</div>";
+		
+		$this->setOverallClassRecomendation();
 	}
 	
-	private function getOverallClassRecomendation(): string
+	private function setOverallClassRecomendation()
 	{
-		//WIP
-		return "This is where the overall class recommendation will go.";
+		$overallRecomendation = "Based on the data from the above data source analyzed by the the above rule, ";
+		
+		if($this->courseNeedsUpdating)
+		{
+			$overallRecomendation .= "this course needs updating. See individual subjects below for details.";
+		}
+		else
+		{
+			$overallRecomendation .= "this course does not need an update at this time.";
+		}
+		
+		?>
+		<script type="text/javascript">
+		
+			$(document).ready(function() {
+				document.getElementById('overallRecomendation').innerHTML = "<?php echo $overallRecomendation; ?>";
+			});
+			
+		</script>
+		<?php
 	}
 	
 	private function getRecommendation(array $keywordData): string

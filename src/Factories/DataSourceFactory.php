@@ -13,7 +13,7 @@ class DataSourceFactory
 			case 2:
 				return new \CurriculumForecaster\TestDataSource2();
 			default:
-				return null;
+				return new \CurriculumForecaster\IEEEDataSource();
 		}
 	}
 }

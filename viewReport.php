@@ -28,6 +28,7 @@ if(!isset($_POST['submit'])){
 						<label for='ds'>Select Data Source:</label>
 						<select class='form-control' id='ds' name='ds'>
 							<option value='1'>IEEE Data Source</option>
+							<option value='2'>Test Data Source</option>
 						</select>
 					</div>
 				</div>

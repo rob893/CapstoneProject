@@ -3,8 +3,13 @@ namespace CurriculumForecaster;
 
 //NOTE: THIS IS A TEST CLASS!
 class TestDataSource2 extends DataSource
-{
+{	
 	
+	protected function setNameAndDescription()
+	{
+		$this->name = "Test data source 2.";
+		$this->description = "Test ds2 description.";
+	}
 	
 	protected function getRawDataFromAPI(string $queryWord): array
 	{

@@ -96,11 +96,22 @@ abstract class DataSource
 		echo "</pre>";
 	}
 	
-	public function getDataFromDatabase(): array
+	public function getDataFromDatabase(bool $limitByCourse = false, int $courseId = -1): array
 	{
-		$sqlQuery = "SELECT ".$this->getDatabaseTableName().".id AS dsTableId, keywordId, frequency, totalSearched, dateTimeStamp, word 
+		$sqlQuery = "SELECT ".$this->getDatabaseTableName().".id AS dsTableId, keywordId, word, frequency, totalSearched, dateTimeStamp 
 						FROM ".$this->getDatabaseTableName()." 
 						INNER JOIN Keywords ON Keywords.id = keywordId";
+		
+		if($limitByCourse)
+		{
+			$sqlQuery = "SELECT ".$this->getDatabaseTableName().".id AS dsTableId, Keywords.id AS keywordId, Courses.id AS courseID, word, name AS courseName, frequency, totalSearched, dateTimeStamp 
+						FROM Courses
+                        INNER JOIN CourseKeywordXref ON CourseKeywordXref.courseId = Courses.id
+						INNER JOIN Keywords ON Keywords.id = CourseKeywordXref.keywordId
+                        INNER JOIN ".$this->getDatabaseTableName()." ON ".$this->getDatabaseTableName().".keywordId = Keywords.id
+						WHERE Courses.id = '$courseId'";
+		}
+		
 		$conn = $this->conn;
 		$queryResults = ($conn->query($sqlQuery)) ? $conn->query($sqlQuery) : null;
 		

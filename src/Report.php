@@ -13,13 +13,19 @@ class Report
 	private $courseNeedsUpdating = false;
 	
 	
-	public function __construct(Datasource $dataSource, RelevancyRule $relevancyRule, FuturePredictor $futurePredictor, string $courseName)
+	public function __construct(Datasource $dataSource, RelevancyRule $relevancyRule, FuturePredictor $futurePredictor, bool $limitByCourse = false, int $courseId = -1)
 	{
 		$this->dataSource = $dataSource;
 		$this->relevancyRule = $relevancyRule;
 		$this->futurePredictor = $futurePredictor;
-		$this->courseName = $courseName;
-		$this->dataFromDatabase = $this->dataSource->getDataFromDatabase();
+		$this->dataFromDatabase = $this->dataSource->getDataFromDatabase($limitByCourse, $courseId);
+		
+		$this->courseName = "All Courses";
+		
+		if($limitByCourse && count($this->dataFromDatabase) > 0 && isset($this->dataFromDatabase[0]['courseName']))
+		{
+			$this->courseName = $this->dataFromDatabase[0]['courseName'];
+		}
 		
 		$dataByKeyword = [];
 		foreach($this->dataFromDatabase as $recordNum => $recordData)

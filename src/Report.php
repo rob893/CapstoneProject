@@ -83,14 +83,14 @@ class Report
 				echo "
 					<div>
 						<h4>'".$keyword."'</h4>
-						
+						<p>Data Points: ".count($this->dataByKeyword[$keyword])."</p>
 						<p>".$this->getRecommendation($this->dataByKeyword[$keyword])."</p>
 						<p>".$this->getFurturePrediction($this->dataByKeyword[$keyword])."</p>
 				";
 				
 				$this->printGraph($keyword);
 				
-				echo "</div>";
+				echo "<br></div>";
 			}
 		}
 		else

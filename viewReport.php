@@ -1,7 +1,23 @@
 <?php
 require_once('header.php');
 
-if(!isset($_POST['submit'])){
+if(!isset($_POST['submit']))
+{
+	$sqlCourses = "SELECT * FROM Courses";
+	
+	$dbConnection = new \CurriculumForecaster\DatabaseConnection();
+	$conn = $dbConnection->getConnection();
+	$queryResults = $conn->query($sqlCourses);
+	
+	$results = [];
+	
+	$i = 0;
+	while($row = $queryResults->fetch_assoc())
+	{
+		$results[$i] = $row;
+		$i++;
+	}
+	
 	?>
 	<div class='container-fluid'>
 		<br>
@@ -14,10 +30,12 @@ if(!isset($_POST['submit'])){
 					<div class='form-group'>
 						<label for='selectClass'>Select Class:</label>
 						<select class='form-control' id='selectClass' name='selectClass'>
-							<option value='1'>Software Engineering</option>
-							<option value='2'>Data Structures and Algorithms</option>
-							<option value='3'>Game Design and Development</option>
-							<option value='4'>Formal Methods</option>
+							<?php
+								foreach($results as $row)
+								{
+									echo "<option value='".$row['id']."'>".$row['name']."</option>";
+								}
+							?>
 						</select>
 					</div>
 				</div>
@@ -68,10 +86,6 @@ else if(isset($_POST['ds']) && isset($_POST['rule']) && isset($_POST['fp']) && i
 	$reportFactory = new \CurriculumForecaster\ReportFactory();
 
 	$report = $reportFactory->createReport($_POST['ds'], $_POST['rule'], $_POST['fp'], true, $_POST['selectClass']);
-	
-	//$report->printDataByKeyword();
-	
-	//$report->printDataFromDatabase();
 	
 	$report->printReport();
 }

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 namespace CurriculumForecaster;
 
 
@@ -41,21 +42,21 @@ class Report
 		$this->dataByKeyword = $dataByKeyword;
 	}
 	
-	public function printDataFromDatabase()
+	public function printDataFromDatabase(): void
 	{
 		echo "<pre>";
 		print_r($this->dataFromDatabase);
 		echo "</pre>";
 	}
 	
-	public function printDataByKeyword()
+	public function printDataByKeyword(): void
 	{
 		echo "<pre>";
 		print_r($this->dataByKeyword);
 		echo "</pre>";
 	}
 	
-	public function printReport()
+	public function printReport(): void
 	{
 		echo "
 			<div class='container-fluid'><br>
@@ -103,7 +104,7 @@ class Report
 		$this->setOverallClassRecomendation();
 	}
 	
-	private function setOverallClassRecomendation()
+	private function setOverallClassRecomendation(): void
 	{
 		$overallRecomendation = "Based on the data from the above data source analyzed by the the above rule, ";
 		
@@ -162,7 +163,7 @@ class Report
 		$this->futurePredictor->predictFuture($dataFromDatabase);
 	}
 	
-	private function printGraph(string $keyword)
+	private function printGraph(string $keyword): void
 	{
 		$guid = uniqid();
 		if(array_key_exists($keyword, $this->dataByKeyword))

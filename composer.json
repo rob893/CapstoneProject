@@ -1,5 +1,8 @@
 {
     "autoload": {
         "psr-4": { "CurriculumForecaster\\": ["src/", "src/DataSources", "src/SDKs", "src/Factories", "src/FuturePredictors", "src/RelevancyRules"] }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7"
     }
 }

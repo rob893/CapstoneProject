@@ -1,4 +1,6 @@
 <?php
+declare(strict_types = 1);
+
 namespace CurriculumForecaster;
 
 class RelevancyRule1 extends RelevancyRule
@@ -6,13 +8,29 @@ class RelevancyRule1 extends RelevancyRule
 	
 	public function analyzeData(array $databaseData): float
 	{
+		if(count($databaseData) == 0)
+		{
+			return 0;
+		}
+		
 		$oldWilsonScore = 1;
 		$wilsonScoreChange = 0;
 		
 		foreach($databaseData as $dataPoint)
 		{
+			if(!isset($dataPoint['totalSearched']) || !isset($dataPoint['frequency']))
+			{
+				throw new \InvalidArgumentException("The passed in array requires both a 'frequency' key and a 'totalSearched' key!");
+			}
+			
 			$ns = $dataPoint['frequency'];
 			$n = $dataPoint['totalSearched'] == 0 ? 1 : $dataPoint['totalSearched'];
+			
+			if(!is_int($n) || !is_int($ns))
+			{
+				throw new \InvalidArgumentException("The keys 'frequency' and 'totalSearched' must be mapped to ints!");
+			}
+			
 			$nf = $n - $ns;
 			$z = 1.96;
 			
@@ -24,7 +42,7 @@ class RelevancyRule1 extends RelevancyRule
 		return $wilsonScoreChange * 100;
 	}
 	
-	protected function setNameAndDescription()
+	protected function setNameAndDescription(): void
 	{
 		$this->name = "Wilson Score Rule";
 		$this->description = "

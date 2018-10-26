@@ -1,11 +1,13 @@
 <?php
+declare(strict_types = 1);
+
 namespace CurriculumForecaster;
 
 //NOTE: THIS IS A TEST CLASS!
 class TestDataSource2 extends DataSource
 {	
 	
-	protected function setNameAndDescription()
+	protected function setNameAndDescription(): void
 	{
 		$this->name = "Test data source 2.";
 		$this->description = "Test ds2 description.";

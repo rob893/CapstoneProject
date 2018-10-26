@@ -3,6 +3,7 @@ declare(strict_types = 1);
 
 namespace CurriculumForecaster;
 
+
 class RelevancyRule1 extends RelevancyRule
 {
 	
@@ -26,9 +27,9 @@ class RelevancyRule1 extends RelevancyRule
 			$ns = $dataPoint['frequency'];
 			$n = $dataPoint['totalSearched'] == 0 ? 1 : $dataPoint['totalSearched'];
 			
-			if(!is_int($n) || !is_int($ns))
+			if(!is_numeric($n) || !is_numeric($ns))
 			{
-				throw new \InvalidArgumentException("The keys 'frequency' and 'totalSearched' must be mapped to ints!");
+				throw new \InvalidArgumentException("The keys 'frequency' and 'totalSearched' must be mapped to a numeric value!");
 			}
 			
 			$nf = $n - $ns;

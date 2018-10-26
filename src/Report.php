@@ -1,5 +1,6 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
+
 namespace CurriculumForecaster;
 
 
@@ -42,21 +43,25 @@ class Report
 		$this->dataByKeyword = $dataByKeyword;
 	}
 	
-	public function printDataFromDatabase(): void
+	public function printDataFromDatabase(): bool
 	{
 		echo "<pre>";
 		print_r($this->dataFromDatabase);
 		echo "</pre>";
+		
+		return true;
 	}
 	
-	public function printDataByKeyword(): void
+	public function printDataByKeyword(): bool
 	{
 		echo "<pre>";
 		print_r($this->dataByKeyword);
 		echo "</pre>";
+		
+		return true;
 	}
 	
-	public function printReport(): void
+	public function printReport(): bool
 	{
 		echo "
 			<div class='container-fluid'><br>
@@ -102,6 +107,8 @@ class Report
 		echo "</div>";
 		
 		$this->setOverallClassRecomendation();
+		
+		return true;
 	}
 	
 	private function setOverallClassRecomendation(): void

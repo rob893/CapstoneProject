@@ -1,5 +1,10 @@
 <?php
+declare(strict_types = 1);
+
 namespace CurriculumForecaster;
+
+use CurriculumForecaster\DatabaseConnection;
+
 
 abstract class DataSource
 {
@@ -7,15 +12,16 @@ abstract class DataSource
 	protected $name;
 	protected $description;
 	
+	
 	public function __construct()
 	{
-		$conn = new \CurriculumForecaster\DatabaseConnection();
+		$conn = new DatabaseConnection();
 		$this->conn = $conn->getConnection();
 		
 		$this->setNameAndDescription();
 	}
 	
-	abstract protected function setNameAndDescription();
+	abstract protected function setNameAndDescription(): void;
 	
 	abstract protected function getFormattedDataFromAPI(string $queryWord): array;
 	
@@ -33,7 +39,7 @@ abstract class DataSource
 		return $this->description;
 	}
 	
-	public function updateDatabase()
+	public function updateDatabase(): void
 	{
 		$keyWordQuery = "SELECT * FROM Keywords";
 		$conn = $this->conn;
@@ -47,48 +53,46 @@ abstract class DataSource
 		while($row = $results->fetch_assoc())
 		{
 			$apiData = $this->getFormattedDataFromAPI($row['word']);
-		
-			if($this->checkDataFormat($apiData))
+			
+			if(!$this->checkDataFormat($apiData))
 			{
-				if($sqlInsert = $conn->prepare("INSERT INTO ".$this->getDatabaseTableName()." (keywordId, frequency, totalSearched) VALUES (?, ?, ?)"))
+				throw new \InvalidArgumentException("The data is not formatted correctly! Please check the getFormattedDataFromAPI() function implementation for the ".$this->getName()." data source.");
+			}
+			
+			if($sqlInsert = $conn->prepare("INSERT INTO ".$this->getDatabaseTableName()." (keywordId, frequency, totalSearched) VALUES (?, ?, ?)"))
+			{
+				$sqlInsert->bind_param('iii', $row['id'], $apiData['freq'], $apiData['totalSearched']);
+				if($sqlInsert->execute() === true)
 				{
-					$sqlInsert->bind_param('iii', $row['id'], $apiData['freq'], $apiData['totalSearched']);
-					if($sqlInsert->execute() === true){
-						$sqlInsert->close();
-					} 
-					else 
-					{
-						echo $sqlInsert->error;
-						$sqlInsert->close();
-					}
-				}
-				else
+					$sqlInsert->close();
+				} 
+				else 
 				{
-					echo "Error preparing statement.";
+					echo $sqlInsert->error;
+					$sqlInsert->close();
 				}
 			}
 			else
 			{
-				echo "Data is not formatted correctly to be put into the database!";
+				throw new \InvalidArgumentException("Error preparing database query.");
 			}
 		}
 	}
 	
-	public function printRawDataFromAPI(string $queryWord)
+	public function printRawDataFromAPI(string $queryWord): void
 	{
 		echo "<pre>";
 		print_r($this->getRawDataFromAPI($queryWord));
 		echo "</pre>";
 	}
 	
-	public function printFormattedDataFromAPI(string $queryWord)
+	public function printFormattedDataFromAPI(string $queryWord): void
 	{
 		$data = $this->getFormattedDataFromAPI($queryWord);
 		
 		if(!$this->checkDataFormat($data))
 		{
-			echo "The data is not formatted correctly! Please check the getFormattedDataFromAPI() function implementation.";
-			return;
+			throw new \InvalidArgumentException("The data is not formatted correctly! Please check the getFormattedDataFromAPI() function implementation.");
 		}
 		
 		echo "<pre>";

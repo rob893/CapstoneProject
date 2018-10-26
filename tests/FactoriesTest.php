@@ -6,10 +6,14 @@ use CurriculumForecaster\DataSourceFactory;
 use CurriculumForecaster\ReportFactory;
 use CurriculumForecaster\RelevancyRuleFactory;
 use CurriculumForecaster\FuturePredictorFactory;
-use CurriculumForecaster\DataSource;
-use CurriculumForecaster\RelevancyRule;
+use CurriculumForecaster\IEEEDataSource;
+use CurriculumForecaster\TestDataSource2;
+use CurriculumForecaster\RelevancyRule1;
+use CurriculumForecaster\RelevancyRule2;
+use CurriculumForecaster\FuturePredictor1;
+use CurriculumForecaster\FuturePredictor2;
 use CurriculumForecaster\Report;
-use CurriculumForecaster\FuturePredictor;
+
 
 final class FactoriesTest extends TestCase
 {
@@ -29,17 +33,22 @@ final class FactoriesTest extends TestCase
 	
 	public function testCreateDataSource(): void
 	{
-		$this->assertInstanceOf(DataSource::class, $this->dsFactory->createDataSource(1));
+		$this->assertInstanceOf(IEEEDataSource::class, $this->dsFactory->createDataSource(1));
+	}
+	
+	public function testCreateDataSource2(): void
+	{
+		$this->assertInstanceOf(TestDataSource2::class, $this->dsFactory->createDataSource(2));
 	}
 	
 	public function testCreateDataSourceMinId(): void
 	{
-		$this->assertInstanceOf(DataSource::class, $this->dsFactory->createDataSource(PHP_INT_MIN));
+		$this->assertInstanceOf(IEEEDataSource::class, $this->dsFactory->createDataSource(PHP_INT_MIN));
 	}
 	
 	public function testCreateDataSourceMaxId(): void
 	{
-		$this->assertInstanceOf(DataSource::class, $this->dsFactory->createDataSource(PHP_INT_MAX));
+		$this->assertInstanceOf(IEEEDataSource::class, $this->dsFactory->createDataSource(PHP_INT_MAX));
 	}
 	
 	public function testCreateDataSourceNullId(): void
@@ -68,17 +77,22 @@ final class FactoriesTest extends TestCase
 	
 	public function testCreateRelevancyRule(): void
 	{
-		$this->assertInstanceOf(RelevancyRule::class, $this->rrFactory->createRelevancyRule(1));
+		$this->assertInstanceOf(RelevancyRule1::class, $this->rrFactory->createRelevancyRule(1));
+	}
+	
+	public function testCreateRelevancyRule2(): void
+	{
+		$this->assertInstanceOf(RelevancyRule2::class, $this->rrFactory->createRelevancyRule(2));
 	}
 	
 	public function testCreateRelevancyRuleMinId(): void
 	{
-		$this->assertInstanceOf(RelevancyRule::class, $this->rrFactory->createRelevancyRule(PHP_INT_MIN));
+		$this->assertInstanceOf(RelevancyRule1::class, $this->rrFactory->createRelevancyRule(PHP_INT_MIN));
 	}
 	
 	public function testCreateRelevancyRuleMaxId(): void
 	{
-		$this->assertInstanceOf(RelevancyRule::class, $this->rrFactory->createRelevancyRule(PHP_INT_MAX));
+		$this->assertInstanceOf(RelevancyRule1::class, $this->rrFactory->createRelevancyRule(PHP_INT_MAX));
 	}
 	
 	public function testCreateRelevancyNullId(): void
@@ -107,17 +121,22 @@ final class FactoriesTest extends TestCase
 	
 	public function testCreateFuturePredictor(): void
 	{
-		$this->assertInstanceOf(FuturePredictor::class, $this->fpFactory->createFuturePredictor(1));
+		$this->assertInstanceOf(FuturePredictor1::class, $this->fpFactory->createFuturePredictor(1));
+	}
+	
+	public function testCreateFuturePredictor2(): void
+	{
+		$this->assertInstanceOf(FuturePredictor2::class, $this->fpFactory->createFuturePredictor(2));
 	}
 	
 	public function testCreateFuturePredictorMinId(): void
 	{
-		$this->assertInstanceOf(FuturePredictor::class, $this->fpFactory->createFuturePredictor(PHP_INT_MIN));
+		$this->assertInstanceOf(FuturePredictor1::class, $this->fpFactory->createFuturePredictor(PHP_INT_MIN));
 	}
 	
 	public function testCreateFuturePredictorMaxId(): void
 	{
-		$this->assertInstanceOf(FuturePredictor::class, $this->fpFactory->createFuturePredictor(PHP_INT_MAX));
+		$this->assertInstanceOf(FuturePredictor1::class, $this->fpFactory->createFuturePredictor(PHP_INT_MAX));
 	}
 	
 	public function testCreateFuturePredictorNullId(): void

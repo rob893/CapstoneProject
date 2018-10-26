@@ -59,7 +59,7 @@ final class RelevancyRule1Test extends TestCase
 		$this->rule->analyzeData($testData);
 	}
 	
-	public function testAnalyzeDataInvalidEmptyArray(): void
+	public function testAnalyzeDataEmptyArray(): void
 	{
 		$testData = [];
 		$this->assertEquals(0, $this->rule->analyzeData($testData));

@@ -1,5 +1,8 @@
 <?php
+declare(strict_types = 1);
+
 namespace CurriculumForecaster;
+
 
 abstract class RelevancyRule
 {
@@ -14,7 +17,7 @@ abstract class RelevancyRule
 	
 	abstract public function analyzeData(array $databaseData): float;
 	
-	abstract protected function setNameAndDescription();
+	abstract protected function setNameAndDescription(): void;
 	
 	public function getName(): string
 	{

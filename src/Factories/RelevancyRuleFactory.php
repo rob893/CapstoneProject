@@ -1,5 +1,10 @@
 <?php
+declare(strict_types = 1);
+
 namespace CurriculumForecaster;
+
+use CurriculumForecaster\RelevancyRule1;
+use CurriculumForecaster\RelevancyRule2;
 
 
 class RelevancyRuleFactory
@@ -9,11 +14,11 @@ class RelevancyRuleFactory
 		switch($id)
 		{
 			case 1:
-				return new \CurriculumForecaster\RelevancyRule1();
+				return new RelevancyRule1();
 			case 2:
-				return new \CurriculumForecaster\RelevancyRule2();
+				return new RelevancyRule2();
 			default:
-				return new \CurriculumForecaster\RelevancyRule1();
+				return new RelevancyRule1();
 		}
 	}
 }

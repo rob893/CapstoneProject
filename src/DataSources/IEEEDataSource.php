@@ -1,12 +1,17 @@
 <?php
+declare(strict_types = 1);
+
 namespace CurriculumForecaster;
+
+use CurriculumForecaster\XPLORE;
+
 
 class IEEEDataSource extends DataSource
 {
 	private $ieeeAPIKey = "c67wkrzktr7ucc385gznctzb";
 	
 	
-	protected function setNameAndDescription()
+	protected function setNameAndDescription(): void
 	{
 		$this->name = "IEEE Xplore Digital Library";
 		$this->description = "The IEEE Xplore digital library is a collection of academic papers.";
@@ -14,7 +19,7 @@ class IEEEDataSource extends DataSource
 	
 	protected function getRawDataFromAPI(string $queryWord): array
 	{
-		$query = new \CurriculumForecaster\XPLORE($this->ieeeAPIKey);
+		$query = new XPLORE($this->ieeeAPIKey);
 		$query->queryText($queryWord);
 		$query->maximumResults(200);
 		$query->resultsFilter('start_year', '2018');

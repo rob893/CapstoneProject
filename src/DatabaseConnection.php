@@ -1,5 +1,8 @@
 <?php
+declare(strict_types = 1);
+
 namespace CurriculumForecaster;
+
 
 class DatabaseConnection
 {
@@ -8,10 +11,10 @@ class DatabaseConnection
 	
 	public function __construct()
 	{
-		$servername="localhost";
-		$user="CapstoneMember";
-		$password="capstonepassword1!";
-		$database="Capstone Project";
+		$servername = "localhost";
+		$user = "CapstoneMember";
+		$password = "capstonepassword1!";
+		$database = "Capstone Project";
 		
 		$conn = new \mysqli($servername, $user, $password, $database);
 		

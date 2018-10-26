@@ -1,5 +1,10 @@
 <?php
+declare(strict_types = 1);
+
 namespace CurriculumForecaster;
+
+use CurriculumForecaster\FuturePredictor1;
+use CurriculumForecaster\FuturePredictor2;
 
 
 class FuturePredictorFactory
@@ -9,11 +14,11 @@ class FuturePredictorFactory
 		switch($id)
 		{
 			case 1:
-				return new \CurriculumForecaster\FuturePredictor1();
+				return new FuturePredictor1();
 			case 2:
-				return new \CurriculumForecaster\FuturePredictor2();
+				return new FuturePredictor2();
 			default:
-				return new \CurriculumForecaster\FuturePredictor1();
+				return new FuturePredictor1();
 		}
 	}
 }

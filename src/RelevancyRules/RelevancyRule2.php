@@ -1,5 +1,8 @@
 <?php
+declare(strict_types = 1);
+
 namespace CurriculumForecaster;
+
 
 class RelevancyRule2 extends RelevancyRule
 {
@@ -9,7 +12,7 @@ class RelevancyRule2 extends RelevancyRule
 		return 0.25;
 	}
 	
-	protected function setNameAndDescription()
+	protected function setNameAndDescription(): void
 	{
 		$this->name = "RR2 name";
 		$this->description = "RR2 description.";

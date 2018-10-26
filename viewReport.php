@@ -1,11 +1,15 @@
 <?php
 require_once('header.php');
 
+use CurriculumForecaster\DatabaseConnection;
+use CurriculumForecaster\ReportFactory;
+
+
 if(!isset($_POST['submit']))
 {
 	$sqlCourses = "SELECT * FROM Courses";
 	
-	$dbConnection = new \CurriculumForecaster\DatabaseConnection();
+	$dbConnection = new DatabaseConnection();
 	$conn = $dbConnection->getConnection();
 	$queryResults = $conn->query($sqlCourses);
 	
@@ -83,7 +87,7 @@ if(!isset($_POST['submit']))
 }
 else if(isset($_POST['ds']) && isset($_POST['rule']) && isset($_POST['fp']) && isset($_POST['selectClass']))
 {
-	$reportFactory = new \CurriculumForecaster\ReportFactory();
+	$reportFactory = new ReportFactory();
 
 	$report = $reportFactory->createReport($_POST['ds'], $_POST['rule'], $_POST['fp'], true, $_POST['selectClass']);
 	

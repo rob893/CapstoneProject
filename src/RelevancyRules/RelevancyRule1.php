@@ -14,9 +14,10 @@ class RelevancyRule1 extends RelevancyRule
 			return 0;
 		}
 		
-		$oldWilsonScore = 1;
-		$wilsonScoreChange = 0;
+		$firstWilsonScore = 1;
+		$lastWilsonScore = 1;
 		
+		$i = 0;
 		foreach($databaseData as $dataPoint)
 		{
 			if(!isset($dataPoint['totalSearched']) || !isset($dataPoint['frequency']))
@@ -36,11 +37,19 @@ class RelevancyRule1 extends RelevancyRule
 			$z = 1.96;
 			
 			$newWilsonScore = ($ns + (pow($z, 2) / (2 * $n))) / ($n + pow($z, 2)) - $z / ($n + pow($z, 2)) * (sqrt(($ns * $nf / $n) + (pow($z, 2) / 4)));
-			$wilsonScoreChange = ($newWilsonScore - $oldWilsonScore) / $oldWilsonScore;
-			$oldWilsonScore = $newWilsonScore;
+
+			if($i == 0)
+			{
+				$firstWilsonScore = $newWilsonScore;
+			}
+			$i++;
+			
+			$lastWilsonScore = $newWilsonScore;
 		}
-		//Ask Chris about the wilson score change calc. As it stands, this will only calculate change from TimePresent - 1 to TimePresent
-		return $wilsonScoreChange * 100;
+		
+		$wilsonScoreChange = ($lastWilsonScore - $firstWilsonScore) / $firstWilsonScore;
+		
+		return (float)number_format($wilsonScoreChange, 4);
 	}
 	
 	protected function setNameAndDescription(): void
@@ -52,6 +61,12 @@ class RelevancyRule1 extends RelevancyRule
 			Wilson score is calculated by the following equation: 
 			WilsonScore = (ns+z2/2n) / (n+z2) - z/(n+z2)(nsnf/n) + (z2/4).
 		";
+	}
+	
+	protected function setBreakPoints(): void
+	{
+		$this->upperBreakPoint = 0.1;
+		$this->lowerBreakPoint = -0.05;
 	}
 }
 

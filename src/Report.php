@@ -90,7 +90,7 @@ class Report
 					<div>
 						<h4>'".$keyword."'</h4>
 						<p>Data Points: ".count($this->dataByKeyword[$keyword])."</p>
-						<p>".$this->getRecommendation($this->dataByKeyword[$keyword])."</p>
+						<p>".$this->getRecommendation($this->relevancyRule, $this->dataByKeyword[$keyword])."</p>
 						<p>".$this->getFurturePrediction($this->dataByKeyword[$keyword])."</p>
 				";
 				
@@ -135,34 +135,38 @@ class Report
 		<?php
 	}
 	
-	private function getRecommendation(array $keywordData): string
+	private function getRecommendation(RelevancyRule $rule, array $keywordData): string
 	{
-		$relValue = $this->analyzeData($keywordData);
+		$relValue = $this->analyzeData($rule, $keywordData);
 		$resultString = "";
 		
-		if($relValue >= 0.5)
+		if($relValue >= $rule->getUpperBreakPoint())
 		{
-			$resultString .= "This topic is still relevant";
+			$resultString .= "This topic is growing in demand";
+		}
+		else if($relValue <= $rule->getLowerBreakPoint())
+		{
+			$this->courseNeedsUpdating = true;
+			$resultString .= "This topic is declining in demand";
 		}
 		else
 		{
-			$this->courseNeedsUpdating = true;
-			$resultString .= "This topic is no longer relevant";
+			$resultString .= "This topic is in stable demand";
 		}
 		
 		$resultString .= " with a relevancy value of ".$relValue.".";
 		return $resultString;
 	}
 	
+	private function analyzeData(RelevancyRule $rule, array $dataFromDatabase): float
+	{
+		return $rule->analyzeData($dataFromDatabase);
+	}
+	
 	private function getFurturePrediction(array $keywordData): string
 	{
 		$this->predictFuture($keywordData);
 		return "This is the future prediction.";
-	}
-	
-	private function analyzeData(array $dataFromDatabase): float
-	{
-		return $this->relevancyRule->analyzeData($dataFromDatabase);
 	}
 	
 	private function predictFuture(array $dataFromDatabase)

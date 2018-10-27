@@ -74,5 +74,15 @@ final class RelevancyRule1Test extends TestCase
 	{
 		$this->assertGreaterThan(0, strlen($this->rule->getDescription()));
 	}
+	
+	public function testGetUpperBreakPoint(): void
+	{
+		$this->assertEquals(0.1, $this->rule->getUpperBreakPoint());
+	}
+	
+	public function testGetLowerBreakPoint(): void
+	{
+		$this->assertEquals(-0.05, $this->rule->getLowerBreakPoint());
+	}
 }
 ?>

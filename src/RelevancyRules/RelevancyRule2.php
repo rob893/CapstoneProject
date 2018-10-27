@@ -17,5 +17,11 @@ class RelevancyRule2 extends RelevancyRule
 		$this->name = "RR2 name";
 		$this->description = "RR2 description.";
 	}
+	
+	protected function setBreakPoints(): void
+	{
+		$this->upperBreakPoint = 2;
+		$this->lowerBreakPoint = -2;
+	}
 }
 ?>

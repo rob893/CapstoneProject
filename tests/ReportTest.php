@@ -14,7 +14,7 @@ final class ReportTest extends TestCase
 	protected function setUp(): void
 	{
 		$rFactory = new ReportFactory();
-		$this->report = $rFactory->createReport(1, 1, 1);
+		$this->report = $rFactory->createReport(1, [1], 1);
 	}
 	
 	public function testPrintReport(): void

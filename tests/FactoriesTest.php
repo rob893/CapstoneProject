@@ -165,17 +165,23 @@ final class FactoriesTest extends TestCase
 	
 	public function testCreateReport(): void
 	{
-		$this->assertInstanceOf(Report::class, $this->rFactory->createReport(1, 1, 1));
+		$this->assertInstanceOf(Report::class, $this->rFactory->createReport(1, [1], 1));
 	}
 	
 	public function testCreateReportMinId(): void
 	{
-		$this->assertInstanceOf(Report::class, $this->rFactory->createReport(PHP_INT_MIN, PHP_INT_MIN, PHP_INT_MIN));
+		$this->assertInstanceOf(Report::class, $this->rFactory->createReport(PHP_INT_MIN, [PHP_INT_MIN], PHP_INT_MIN));
 	}
 	
 	public function testCreateReportMaxId(): void
 	{
-		$this->assertInstanceOf(Report::class, $this->rFactory->createReport(PHP_INT_MAX, PHP_INT_MAX, PHP_INT_MAX));
+		$this->assertInstanceOf(Report::class, $this->rFactory->createReport(PHP_INT_MAX, [PHP_INT_MAX], PHP_INT_MAX));
+	}
+	
+	public function testCreateReportEmptyRuleArray(): void
+	{
+		$this->expectException(InvalidArgumentException::class);
+		$this->rFactory->createReport(1, [], 1);
 	}
 	
 	public function testCreateReportNullId(): void

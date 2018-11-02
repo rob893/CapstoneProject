@@ -7,7 +7,7 @@ namespace CurriculumForecaster;
 class Report
 {
 	private $dataSource;
-	private $relevancyRule;
+	private $relevancyRules;
 	private $futurePredictor;
 	private $dataFromDatabase;
 	private $dataByKeyword;
@@ -15,10 +15,23 @@ class Report
 	private $courseNeedsUpdating = false;
 	
 	
-	public function __construct(Datasource $dataSource, RelevancyRule $relevancyRule, FuturePredictor $futurePredictor, bool $limitByCourse = false, int $courseId = -1)
+	public function __construct(Datasource $dataSource, array $relevancyRules, FuturePredictor $futurePredictor, bool $limitByCourse = false, int $courseId = -1)
 	{
+		if(count($relevancyRules) < 1)
+		{
+			throw new \InvalidArgumentException("There must be at least one rule in relevancyRules!");
+		}
+		
+		foreach($relevancyRules as $rule)
+		{
+			if(!($rule instanceof RelevancyRule))
+			{
+				throw new \InvalidArgumentException("A non relevancy rule was passed into the relevancyRules array!");
+			}
+		}
+		
 		$this->dataSource = $dataSource;
-		$this->relevancyRule = $relevancyRule;
+		$this->relevancyRules = $relevancyRules;
 		$this->futurePredictor = $futurePredictor;
 		$this->dataFromDatabase = $this->dataSource->getDataFromDatabase($limitByCourse, $courseId);
 		
@@ -70,11 +83,18 @@ class Report
 				<br>
 				<h2>Analysis for ".$this->courseName."</h2>
 				<br>
-				<h4>Data Source Used: ".$this->dataSource->getName()."</h4>
+				<h4>Data Source Used:<h4><h5>".$this->dataSource->getName()."</h5>
 				<p>".$this->dataSource->getDescription()."</p>
-				<h4>Rule Used: ".$this->relevancyRule->getName()."</h4>
-				<p>".$this->relevancyRule->getDescription()."</p>
-				<h4>Future Predictor Used: ".$this->futurePredictor->getName()."</h4>
+				<h4>Rules Used:</h4> 
+		";
+		foreach($this->relevancyRules as $rule)
+		{
+			echo "<h5>".$rule->getName()."</h5>";
+			echo "<p>".$rule->getDescription()."</p>";
+		}
+		
+		echo "
+				<h4>Future Predictor Used:</h4><h5>".$this->futurePredictor->getName()."</h5>
 				<p>".$this->futurePredictor->getDescription()."</p>
 				<h4>Overall Recommendation</h4>
 				<p id='overallRecomendation'></p>
@@ -90,10 +110,18 @@ class Report
 					<div>
 						<h4>'".$keyword."'</h4>
 						<p>Data Points: ".count($this->dataByKeyword[$keyword])."</p>
-						<p>".$this->getRecommendation($this->relevancyRule, $this->dataByKeyword[$keyword])."</p>
-						<p>".$this->getFurturePrediction($this->dataByKeyword[$keyword])."</p>
+						<h5>Rule Analysis:</h5>
 				";
 				
+				foreach($this->relevancyRules as $rule)
+				{
+					echo "<h5>Recommendation Using ".$rule->getName()."</h5>";
+					echo "<p>".$this->getRecommendation($rule, $this->dataByKeyword[$keyword])."</p>";
+				}
+				
+				echo "<h5>Future Analysis:</h5><p>".$this->getFurturePrediction($this->dataByKeyword[$keyword])."</p>";
+				
+				echo "<h5>Graph of Data Over Time:</h5>";
 				$this->printGraph($keyword);
 				
 				echo "<br></div>";

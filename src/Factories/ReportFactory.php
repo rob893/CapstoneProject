@@ -11,17 +11,36 @@ use CurriculumForecaster\Report;
 
 class ReportFactory
 {
-	public function createReport(int $dataSourceId, int $relevancyRuleId, int $futurePredictorId, bool $limitByCourse = false, int $courseId = -1): Report
+	public function createReport(int $dataSourceId, array $relevancyRuleIds, int $futurePredictorId, bool $limitByCourse = false, int $courseId = -1): Report
 	{
+		if(count($relevancyRuleIds) < 1)
+		{
+			throw new \InvalidArgumentException("There must be at least one id in relevancyRuleIds!");
+		}
+		
 		$dataSourceFactory = new DataSourceFactory();
 		$relevancyRuleFactory = new RelevancyRuleFactory();
 		$futurePredictorFactory = new FuturePredictorFactory();
 		
 		$dataSource = $dataSourceFactory->createDataSource($dataSourceId);
-		$relevancyRule = $relevancyRuleFactory->createRelevancyRule($relevancyRuleId);
+		
+		$relevancyRules = [];
+		
+		foreach($relevancyRuleIds as $ruleId)
+		{
+			if(is_numeric($ruleId))
+			{
+				$relevancyRules[] = $relevancyRuleFactory->createRelevancyRule((int)$ruleId);
+			}
+			else
+			{
+				throw new \InvalidArgumentException("A non numeric value was passed into the rule ids array!");
+			}
+		}
+		
 		$futurePredictor = $futurePredictorFactory->createFuturePredictor($futurePredictorId);
 		
-		return new Report($dataSource, $relevancyRule, $futurePredictor, $limitByCourse, $courseId);
+		return new Report($dataSource, $relevancyRules, $futurePredictor, $limitByCourse, $courseId);
 	}
 }
 ?>

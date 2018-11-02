@@ -23,6 +23,24 @@ if(!isset($_POST['submit']))
 	}
 	
 	?>
+	<script>
+		$(function(){
+
+			var requiredCheckboxes = $(':checkbox[required]');
+
+			requiredCheckboxes.change(function(){
+
+				if(requiredCheckboxes.is(':checked')) {
+					requiredCheckboxes.removeAttr('required');
+				}
+
+				else {
+					requiredCheckboxes.attr('required', 'required');
+				}
+			});
+
+		});
+	</script>
 	<div class='container-fluid'>
 		<br>
 		<br>
@@ -60,11 +78,9 @@ if(!isset($_POST['submit']))
 			<div class='row'>
 				<div class='col-sm-2'>
 					<div class='form-group'>
-						<label for='rule'>Select Relevancy Rule:</label>
-						<select class='form-control' id='rule' name='rule'>
-							<option value='1'>Rule 1</option>
-							<option value='2'>Rule 2</option>
-						</select>
+						<label>Select Relevancy Rules:</label><br>
+						<input type='checkbox' name='rule[]' id='rule1' value='1' required> Wilson Score Rule<br>
+						<input type='checkbox' name='rule[]' id='rule2' value='2' required> Rule 2<br>
 					</div>
 				</div>
 			</div>
@@ -80,7 +96,7 @@ if(!isset($_POST['submit']))
 					</div>
 				</div>
 			</div>
-			<input name='submit' type='submit' value='Select'>
+			<input name='submit' type='submit' value='Create Report'>
 		</form>
 	</div>
 	<?php

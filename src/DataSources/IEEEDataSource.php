@@ -21,9 +21,11 @@ class IEEEDataSource extends DataSource
 	{
 		$query = new XPLORE($this->ieeeAPIKey);
 		$query->queryText($queryWord);
-		$query->maximumResults(200);
+		$query->maximumResults(20);
 		$query->resultsFilter('start_year', '2018');
 		$results = $query->callAPI();
+		
+		$results = $results == null ? [ 'total_records' => 0, 'total_searched' => 0 ] : $results;
 		
 		return $results;
 	}

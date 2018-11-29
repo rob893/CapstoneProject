@@ -25,8 +25,11 @@ class IEEEDataSource extends DataSource
 		$query->resultsFilter('start_year', '2018');
 		$results = $query->callAPI();
 		
-		$results = $results == null ? [ 'total_records' => 0, 'total_searched' => 0 ] : $results;
-		
+		if($results == null)
+		{
+			$results = [ 'total_records' => 0, 'total_searched' => 0 ];
+		}		
+
 		return $results;
 	}
 	
